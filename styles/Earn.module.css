@@ -32,7 +32,7 @@
 }
 
 .nftBoxGrid {
-    width: 1200px;
+    width: 900px;
     max-width: 95vw;
     display: flex;
     flex-direction: row;
@@ -179,6 +179,7 @@
     max-height: 300px;
     border-radius: 15px;
 }
+
 .container {
     margin-top: 96px;
     display: flex;

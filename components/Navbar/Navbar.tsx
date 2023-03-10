@@ -24,7 +24,7 @@ export function Navbar() {
           </Link>
 
           <div className={styles.navMiddle}>
-            <Link href="/buy" className={styles.link}>
+            <Link href="/Aura" className={styles.link}>
               Buy
             </Link>
             <Link href="/sell" className={styles.link}>
@@ -40,9 +40,10 @@ export function Navbar() {
             </Link>
           </div>
         </div>
+
         <div className={styles.navRight}>
           <div className={styles.navConnect}>
-            <ConnectWallet colorMode="dark" />
+            <ConnectWallet />
           </div>
           {address && (
             <Link className={styles.link} href={`/profile/${address}`}>
