@@ -7,7 +7,7 @@ import { ChainId } from "@thirdweb-dev/sdk";
 
 // 2. The address of the marketplace V3 smart contract.
 // Deploy your own: https://thirdweb.com/thirdweb.eth/MarketplaceV3
-export const MARKETPLACE_ADDRESS = "0x6604bd9D7770035f26B4ACeab2C746fdCE166473";
+export const MARKETPLACE_ADDRESS = "0xc3e59Dd5683eFA9C699985e2Edb80671d77728d2";
 export const NETWORK_ID = ChainId.Mainnet;
 
 // 3. The address of your NFT collection smart contract.
