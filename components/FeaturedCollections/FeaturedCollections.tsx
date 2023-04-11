@@ -26,13 +26,6 @@ export default function FeaturedCollections() {
                         />
                     </a>
                     <div className={styles.infoContainer}>
-                        {/* Collection Avatar Image */}
-                        <div className={styles.collectionAvatar}>
-                            <Image
-                                src=""
-                                alt=""
-                            />
-                        </div>
                         {/* Collection Name */}
                         <div>
                             <a href="https://www.auraexchange.org/mint">
@@ -55,13 +48,6 @@ export default function FeaturedCollections() {
                         />
                     </a>
                     <div className={styles.infoContainer}>
-                        {/* Collection Avatar Image */}
-                        <div className={styles.collectionAvatar}>
-                            <Image
-                                src={""}
-                                alt=""
-                            />
-                        </div>
                         {/* Collection Name */}
                         <div>
                             <a href="https://kronickatz.auraexchange.org/">
@@ -84,13 +70,6 @@ export default function FeaturedCollections() {
                         />
                     </a>
                     <div className={styles.infoContainer}>
-                        {/* Collection Avatar Image */}
-                        <div className={styles.collectionAvatar}>
-                            <Image
-                                src=""
-                                alt=""
-                            />
-                        </div>
                         {/* Collection Name */}
                         <div>
                             <a href="https://rarelazyapepes.auraexchange.org/">
@@ -113,13 +92,6 @@ export default function FeaturedCollections() {
                         />
                     </a>
                     <div className={styles.infoContainer}>
-                        {/* Collection Avatar Image */}
-                        <div className={styles.collectionAvatar}>
-                            <Image
-                                src={""}
-                                alt=""
-                            />
-                        </div>
                         {/* Collection Name */}
                         <div>
                             <a href="https://shibu.auraexchange.org/">
@@ -142,13 +114,6 @@ export default function FeaturedCollections() {
                         />
                     </a>
                     <div className={styles.infoContainer}>
-                        {/* Collection Avatar Image */}
-                        <div className={styles.collectionAvatar}>
-                            <Image
-                                src={""}
-                                alt=""
-                            />
-                        </div>
                         {/* Collection Name */}
                         <div>
                             <a href="https://zombeze.auraexchange.org/">
