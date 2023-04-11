@@ -28,25 +28,27 @@ export default function NFTGrid({
           </div>
         ))
       ) : data && data.length > 0 ? (
-        data.map((nft) =>
-          !overrideOnclickBehavior ? (
-            <Link
-              href={`/token/${NFT_COLLECTION_ADDRESS}/${nft.metadata.id}`}
-              key={nft.metadata.id}
-              className={styles.nftContainer}
-            >
-              <NFT nft={nft} />
-            </Link>
-          ) : (
-            <div
-              key={nft.metadata.id}
-              className={styles.nftContainer}
-              onClick={() => overrideOnclickBehavior(nft)}
-            >
-              <NFT nft={nft} />
-            </div>
+        data
+          .filter((nft) => nft.metadata.id !== "1")
+          .map((nft) =>
+            !overrideOnclickBehavior ? (
+              <Link
+                href={`/token/${NFT_COLLECTION_ADDRESS}/${nft.metadata.id}`}
+                key={nft.metadata.id}
+                className={styles.nftContainer}
+              >
+                <NFT nft={nft} />
+              </Link>
+            ) : (
+              <div
+                key={nft.metadata.id}
+                className={styles.nftContainer}
+                onClick={() => overrideOnclickBehavior(nft)}
+              >
+                <NFT nft={nft} />
+              </div>
+            )
           )
-        )
       ) : (
         <p>{emptyText}</p>
       )}
