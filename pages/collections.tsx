@@ -9,7 +9,7 @@ export default function Stake() {
     return (
         <div className={styles.container}>
             {/* Top Section */}
-            <h1 className={styles.h1}>Collections</h1>
+            <h1 className={styles.h1}>Collections baby</h1>
             <div className={styles.nftBoxGrid}>
 
                 <div

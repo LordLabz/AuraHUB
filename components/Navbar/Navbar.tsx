@@ -24,6 +24,9 @@ export function Navbar() {
           </Link>
 
           <div className={styles.navMiddle}>
+            <Link href={"/collectionsShowcase"} className = {styles.link}>
+              Collections 
+            </Link>
             <Link href="/Aura" className={styles.link}>
               Buy
             </Link>

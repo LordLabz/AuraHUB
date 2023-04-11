@@ -1,0 +1,30 @@
+.embla {
+    overflow: hidden;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    /* background-color: #030303; */
+    
+  }
+  .embla__container {
+    display: flex;
+  }
+  .embla__slide {
+    position:relative;
+    height: 100%;
+    flex: 0 0 40%;
+    min-width: 0;
+  }
+
+  .infoContainer{
+    padding: 1.5rem;
+    display: flex;
+    flex-shrink: 0;
+  }
+  .collectionAvatar{
+    margin-right: 1rem;
+    height: 2.5rem;
+    border-radius: 9999px
+  }
+  
