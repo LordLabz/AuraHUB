@@ -19,10 +19,12 @@ export default function NFTGrid({
   overrideOnclickBehavior,
   emptyText = "No NFTs found for this collection.",
 }: Props) {
+  const customOrder = ["0", "5", "2", "3", "4"];
+
   return (
     <div className={styles.nftGridContainer}>
       {isLoading ? (
-        [...Array(5)].map((_, index) => (
+        [...Array(20)].map((_, index) => (
           <div key={index} className={styles.nftContainer}>
             <Skeleton key={index} width={"100%"} height="312px" />
           </div>
@@ -30,6 +32,21 @@ export default function NFTGrid({
       ) : data && data.length > 0 ? (
         data
           .filter((nft) => nft.metadata.id !== "1")
+          .sort((a, b) => {
+            const aIndex = customOrder.indexOf(a.metadata.id);
+            const bIndex = customOrder.indexOf(b.metadata.id);
+
+            if (aIndex === -1 && bIndex === -1) {
+              return 0;
+            }
+            if (aIndex === -1) {
+              return 1;
+            }
+            if (bIndex === -1) {
+              return -1;
+            }
+            return aIndex - bIndex;
+          })
           .map((nft) =>
             !overrideOnclickBehavior ? (
               <Link
