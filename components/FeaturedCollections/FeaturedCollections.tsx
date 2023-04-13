@@ -36,7 +36,7 @@ export default function FeaturedCollections() {
                         <div>
                             <a href="https://www.auraexchange.org/mint" target='_blank'>
                                 <span>
-                                    Aure Exchange Membership
+                                    Aura Exchange Membership
                                 </span>
                             </a>
                         </div>
@@ -52,6 +52,11 @@ export default function FeaturedCollections() {
                             height={430}
                             width={379}
                         />
+                        <div className={styles.labelContainer}>
+                            <span className={styles.label}>
+                                SOLD OUT
+                            </span>
+                        </div>
                     </a>
                     <div className={styles.infoContainer}>
                         {/* Collection Name */}
@@ -74,6 +79,11 @@ export default function FeaturedCollections() {
                             height={430}
                             width={379}
                         />
+                        <div className={styles.labelContainer}>
+                            <span className={styles.label}>
+                                MINTING NOW
+                            </span>
+                        </div>
                     </a>
                     <div className={styles.infoContainer}>
                         {/* Collection Name */}
