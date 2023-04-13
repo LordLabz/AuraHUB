@@ -10,21 +10,22 @@ interface Element {
 }
 
 const elements: Element[] = [
-    { id: 1, name: 'BAPC', imageUrl: 'https://via.placeholder.com/150', pcmUrl: 'javascript:void(0)' },
-    { id: 2, name: 'Casa De Luna', imageUrl: 'https://via.placeholder.com/150', pcmUrl: 'javascript:void(0)' },
+    { id: 1, name: 'BAPC', imageUrl: '/collectionsLogos/BAPC_Ape.png', pcmUrl: 'javascript:void(0)' },
+    { id: 2, name: 'Casa De Luna', imageUrl: '/collectionsLogos/Casa_de_luna.png', pcmUrl: 'javascript:void(0)' },
     { id: 3, name: 'Copernic Space', imageUrl: 'https://via.placeholder.com/150', pcmUrl: 'javascript:void(0)' },
     { id: 4, name: 'DaMonkez', imageUrl: '/collectionsLogos/DaMonkez.png', pcmUrl: 'https://damonkez.auraexchange.org/' },
     { id: 5, name: 'Deluxe Goat', imageUrl: 'https://via.placeholder.com/150', pcmUrl: 'javascript:void(0)' },
     { id: 6, name: 'FourEighty', imageUrl: '/collectionsLogos/rust.gif', pcmUrl: 'https://foureighty.auraexchange.org/' },
-    { id: 7, name: 'Guilty Bunnies', imageUrl: 'https://via.placeholder.com/150', pcmUrl: 'javascript:void(0)' },
+    { id: 7, name: 'Guilty Bunnies', imageUrl: '/collectionsLogos/GuiltyBunnies.png', pcmUrl: 'javascript:void(0)' },
     { id: 8, name: 'Hawtheadzz', imageUrl: 'https://via.placeholder.com/150', pcmUrl: 'javascript:void(0)' },
     { id: 9, name: 'illaz (Rug Rescue)', imageUrl: '/collectionsLogos/illaz.png', pcmUrl: 'https://illaz.auraexchange.org/' },
     { id: 10, name: 'KronicKatz', imageUrl: '/collectionsLogos/KronicKatz.png', pcmUrl: 'https://kronickatz.auraexchange.org/' },
-    { id: 11, name: 'MAW', imageUrl: 'https://via.placeholder.com/150', pcmUrl: 'javascript:void(0)' },
+    { id: 11, name: 'MAW', imageUrl: '/collectionsLogos/MAW logo.png', pcmUrl: 'javascript:void(0)' },
     { id: 12, name: 'Mentaverse', imageUrl: 'https://via.placeholder.com/150', pcmUrl: 'javascript:void(0)' },
     { id: 13, name: 'Molly', imageUrl: 'https://via.placeholder.com/150', pcmUrl: 'javascript:void(0)' },
     { id: 14, name: 'NFA', imageUrl: 'https://via.placeholder.com/150', pcmUrl: 'javascript:void(0)' },
     { id: 15, name: 'NFTSociety', imageUrl: 'https://via.placeholder.com/150', pcmUrl: 'javascript:void(0)' },
+    { id: 15, name: 'NFT Unity', imageUrl: '/collectionsLogos/NFTUnity.png', pcmUrl: 'https://nft-unity.auraexchange.org/' },
     { id: 16, name: 'Nubis', imageUrl: 'https://via.placeholder.com/150', pcmUrl: 'javascript:void(0)' },
     { id: 17, name: 'One', imageUrl: 'https://via.placeholder.com/150', pcmUrl: 'javascript:void(0)' },
     { id: 17, name: 'PAYC', imageUrl: 'https://via.placeholder.com/150', pcmUrl: 'javascript:void(0)' },
@@ -50,15 +51,12 @@ const ElementsGrid = () => {
         setShowLoadMoreButton(elements.length > nextElements.length);
     };
 
-    console.log(elements[3])
-
-    console.log(showLoadMoreButton)
     return (
         <>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
                 {visibleElements.map((element) => (
                     <div key={element.id}>
-                        <a href={element.pcmUrl}>
+                        <a href={element.pcmUrl} target='_blank'>
                             <Image 
                             src={element.imageUrl} 
                             alt={element.name}
