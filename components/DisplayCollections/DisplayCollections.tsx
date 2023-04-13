@@ -34,7 +34,7 @@ const elements: Element[] = [
     { id: 21, name: 'R.L.A.', imageUrl: '/collectionsLogos/RareLazyApepes.png', pcmUrl: 'https://rarelazyapepes.auraexchange.org/' },
     { id: 22, name: 'Serum Labz', imageUrl: 'https://via.placeholder.com/150', pcmUrl: 'javascript:void(0)' },
     { id: 23, name: 'Shibu Society', imageUrl: '/collectionsLogos/Shibu.png', pcmUrl: 'https://shibu.auraexchange.org/' },
-    { id: 24, name: 'Tas2.0', imageUrl: '/collectionsLogos/tas.png', pcmUrl: 'javascript:void(0)' },
+    { id: 24, name: 'Tas2.0', imageUrl: '/collectionsLogos/tas.png', pcmUrl: 'http://tas2.auraexchange.org/' },
     { id: 25, name: 'WolfPunx NFT', imageUrl: 'https://via.placeholder.com/150', pcmUrl: 'javascript:void(0)' },
     { id: 26, name: 'X-Moose', imageUrl: 'https://via.placeholder.com/150', pcmUrl: 'javascript:void(0)' },
     { id: 27, name: 'Zombeze', imageUrl: '/collectionsLogos/zombeze.png', pcmUrl: 'https://zombeze.auraexchange.org/' },
