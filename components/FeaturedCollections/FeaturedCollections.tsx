@@ -20,7 +20,7 @@ export default function FeaturedCollections() {
                     <a href="https://www.auraexchange.org/mint" target='_blank'>
                         <Image
                             src="https://ipfs.thirdwebcdn.com/ipfs/Qmaw79Y7SFDwj1HPHYAGer5uUCu46oYdk1SVuNb4dyzuKx/AURA%20(300%20%C3%97%20300%20px).png"
-                            alt="Aura ProjectS"
+                            alt="Aura Projects"
                             height={430}
                             width={379}
                         />

@@ -10,6 +10,7 @@ interface Element {
 }
 
 const elements: Element[] = [
+    {id: 0, name:'Aura Exchange', imageUrl:'https://ipfs.thirdwebcdn.com/ipfs/Qmaw79Y7SFDwj1HPHYAGer5uUCu46oYdk1SVuNb4dyzuKx/AURA%20(300%20%C3%97%20300%20px).png', pcmUrl:'https://www.auraexchange.org/mint'},
     { id: 1, name: 'BAPC', imageUrl: '/collectionsLogos/BAPC_Ape.png', pcmUrl: 'javascript:void(0)' },
     { id: 2, name: 'Casa De Luna', imageUrl: '/collectionsLogos/Casa_de_luna-White.png', pcmUrl: 'javascript:void(0)' },
     { id: 3, name: 'Copernic Space', imageUrl: 'https://via.placeholder.com/150', pcmUrl: 'javascript:void(0)' },
@@ -40,9 +41,10 @@ const elements: Element[] = [
 
 ];
 
-const ElementsGrid = () => {
+const DisplayCollections = () => {
     const [visibleElements, setVisibleElements] = useState<Element[]>(elements.slice(0, 8));
     const [showLoadMoreButton, setShowLoadMoreButton] = useState<boolean>(elements.length > 8);
+
 
     const handleLoadMore = () => {
         const nextElements = elements.slice(0, visibleElements.length + 8);
@@ -76,4 +78,4 @@ const ElementsGrid = () => {
     );
 };
 
-export default ElementsGrid;
+export default DisplayCollections;
