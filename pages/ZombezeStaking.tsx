@@ -36,14 +36,14 @@ const Stake: NextPage = () => {
   const { data: stakedTokens } = useContractRead(
     contract,
     "getStakeInfo",
-    address
+    [address]
   );
 
   useEffect(() => {
     if (!contract || !address) return;
 
     async function loadClaimableRewards() {
-      const stakeInfo = await contract?.call("getStakeInfo", address);
+      const stakeInfo = await contract?.call("getStakeInfo", [address]);
       setClaimableRewards(stakeInfo[1]);
     }
 
