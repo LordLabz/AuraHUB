@@ -13,7 +13,7 @@ const elements: Element[] = [
     {id: 0, name:'Aura Exchange', imageUrl:'https://ipfs.thirdwebcdn.com/ipfs/Qmaw79Y7SFDwj1HPHYAGer5uUCu46oYdk1SVuNb4dyzuKx/AURA%20(300%20%C3%97%20300%20px).png', pcmUrl:'https://www.auraexchange.org/mint'},
     { id: 1, name: 'BAPC', imageUrl: '/collectionsLogos/BAPC_Ape.png', pcmUrl: '/comingSoon' },
     { id: 2, name: 'Casa De Luna', imageUrl: '/collectionsLogos/Casa_de_luna-White.png', pcmUrl: '/comingSoon' },
-    { id: 3, name: 'Copernic Space', imageUrl: '/collectionsLogos/Copernic_space.png', pcmUrl: '/comingSoon' },
+    { id: 3, name: 'Copernic Space', imageUrl: '/collectionsLogos/CopernicSpace.png', pcmUrl: '/comingSoon' },
     { id: 4, name: 'DaMonkez', imageUrl: '/collectionsLogos/DaMonkez.png', pcmUrl: 'https://damonkez.auraexchange.org/' },
     { id: 5, name: 'Deluxe Goat', imageUrl: '/collectionsLogos/Deluxe Labs Logo.png', pcmUrl: '/comingSoon' },
     { id: 6, name: 'FourEighty', imageUrl: '/collectionsLogos/rust.gif', pcmUrl: 'https://foureighty.auraexchange.org/' },
