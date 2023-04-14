@@ -21,9 +21,9 @@ const elements: Element[] = [
     { id: 8, name: 'illaz (Rug Rescue)', imageUrl: '/collectionsLogos/illaz.png', pcmUrl: 'https://illaz.auraexchange.org/' },
     { id: 9, name: 'KronicKatz', imageUrl: '/collectionsLogos/KronicKatz.png', pcmUrl: 'https://kronickatz.auraexchange.org/' },
     { id: 10, name: 'MAW', imageUrl: '/collectionsLogos/MAW logo.png', pcmUrl: '/comingSoon' },
-    { id: 11, name: 'Mentaverse', imageUrl: '/comingSoon.png', pcmUrl: '/comingSoon' },
+    { id: 11, name: 'Mentaverse', imageUrl: '/collectionsLogos/Mentaverse_logo.png', pcmUrl: '/comingSoon' },
     { id: 12, name: 'Molly', imageUrl: '/collectionsLogos/MollyNFT.png', pcmUrl: 'http://molly.auraexchange.org/' },
-    { id: 13, name: 'NFA', imageUrl: '/comingSoon.png', pcmUrl: '/comingSoon' },
+    { id: 13, name: 'NFA', imageUrl: '/collectionsLogos/NFA_logo.png', pcmUrl: '/comingSoon' },
     { id: 15, name: 'NFT Unity', imageUrl: '/collectionsLogos/NFTUnity.png', pcmUrl: 'https://nft-unity.auraexchange.org/' },
     { id: 16, name: 'Nubis', imageUrl: '/comingSoon.png', pcmUrl: '/comingSoon' },
     { id: 17, name: 'One', imageUrl: '/comingSoon.png', pcmUrl: '/comingSoon' },
@@ -53,10 +53,10 @@ const DisplayCollections = () => {
     };
 
     return (
-        <>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
+        <div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginLeft:'9.1%'}}>
                 {visibleElements.map((element) => (
-                    <div key={element.id}>
+                    <div style={{justifyContent:'center', placeItems:'center'}} key={element.id}>
                         <a href={element.pcmUrl} target='_blank'>
                             <Image 
                             src={element.imageUrl} 
@@ -74,7 +74,7 @@ const DisplayCollections = () => {
                     <button onClick={handleLoadMore} className={styles.secondaryCta}>Load More</button>
                 )}
             </div>
-        </>
+        </div>
     );
 };
 

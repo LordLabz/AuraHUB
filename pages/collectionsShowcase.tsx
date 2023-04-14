@@ -14,18 +14,19 @@ export default function collectionsShowcase() {
             <SearchBar />
 
             {/*Featued Collections */}
-            <div style={{ paddingTop: "4rem"}}>
-                <h1 style ={{textAlign:'center'}}>Featured Collections</h1>
+            <div style={{ paddingTop: "4rem" }}>
+                <h1 style={{ textAlign: 'center' }}>Featured Collections</h1>
                 <FeaturedCollections />
             </div>
 
             {/*Card Grid */}
-            <div >
-            <h1 style ={{textAlign:'center'}}>Browse Collections</h1>
-                <DisplayCollections />
+            <div>
+                <h1 style={{ textAlign: 'center' }}>Browse Collections</h1>
+                <div>
+                    <DisplayCollections/>
+                </div>
+                
             </div>
-
-
         </Container>
     );
 }
