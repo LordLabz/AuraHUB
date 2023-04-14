@@ -82,7 +82,6 @@ export default function SearchBar() {
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }} >
                 {filteredData.map(item => (
-                    <div>
                         <div key={item.id}>
                             <a href={item.pcmUrl} target='_blank'>
                                 <Image
@@ -93,8 +92,6 @@ export default function SearchBar() {
                                 <p>{item.name}</p>
                             </a>
                         </div>
-                    </div>
-
                 ))}
             </div>
         </>
