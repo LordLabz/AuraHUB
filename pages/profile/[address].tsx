@@ -16,6 +16,7 @@ import {
 } from "../../const/contractAddresses";
 import styles from "../../styles/Profile.module.css";
 import randomColor from "../../util/randomColor";
+import EmbedPage from "../embed";
 
 const [randomColor1, randomColor2, randomColor3, randomColor4] = [
   randomColor(),
@@ -101,9 +102,8 @@ export default function ProfilePage() {
       </div>
 
       <div
-        className={`${
-          tab === "nfts" ? styles.activeTabContent : styles.tabContent
-        }`}
+        className={`${tab === "nfts" ? styles.activeTabContent : styles.tabContent
+          }`}
       >
         <NFTGrid
           data={ownedNfts}
@@ -113,9 +113,8 @@ export default function ProfilePage() {
       </div>
 
       <div
-        className={`${
-          tab === "listings" ? styles.activeTabContent : styles.tabContent
-        }`}
+        className={`${tab === "listings" ? styles.activeTabContent : styles.tabContent
+          }`}
       >
         {loadingDirects ? (
           <p>Loading...</p>
@@ -129,9 +128,8 @@ export default function ProfilePage() {
       </div>
 
       <div
-        className={`${
-          tab === "auctions" ? styles.activeTabContent : styles.tabContent
-        }`}
+        className={`${tab === "auctions" ? styles.activeTabContent : styles.tabContent
+          }`}
       >
         {loadingAuctions ? (
           <p>Loading...</p>
@@ -143,6 +141,7 @@ export default function ProfilePage() {
           ))
         )}
       </div>
+      <EmbedPage />
     </Container>
   );
 }
