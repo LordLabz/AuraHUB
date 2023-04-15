@@ -27,7 +27,7 @@ const [randomColor1, randomColor2, randomColor3, randomColor4] = [
 
 export default function ProfilePage() {
   const router = useRouter();
-  const [tab, setTab] = useState<"nfts" | "listings" | "auctions">("nfts");
+  const [tab, setTab] = useState<"nfts" | "listings" | "auctions" | "Rev Share">("nfts");
 
   const { contract: nftCollection } = useContract(NFT_COLLECTION_ADDRESS);
 
@@ -99,6 +99,13 @@ export default function ProfilePage() {
         >
           Auctions
         </h3>
+        <h3
+          className={`${styles.tab}
+        ${tab === "Rev Share" ? styles.activeTab : ""}`}
+          onClick={() => setTab("Rev Share")}
+        >
+          Rev Share
+        </h3>
       </div>
 
       <div
@@ -141,7 +148,13 @@ export default function ProfilePage() {
           ))
         )}
       </div>
-      <EmbedPage />
+
+      <div
+        className={`${tab === "Rev Share" ? styles.activeTabContent : styles.tabContent
+          }`}
+      >
+        <h1 style={{ textAlign: 'center' }}>Coming Soon 🚀</h1>
+      </div>
     </Container>
   );
 }
