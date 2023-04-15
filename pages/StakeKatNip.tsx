@@ -49,7 +49,7 @@ const Stake: NextPage = () => {
         if (!contract) return;
 
         async function loadStakedNfts() {
-            const stakedTokens = await contract?.call("getStakedTokens", address);
+            const stakedTokens = await contract?.call("getStakedTokens", [address]);
 
             // For each staked token, fetch it from the sdk
             const stakedNfts = await Promise.all(
@@ -74,7 +74,7 @@ const Stake: NextPage = () => {
         if (!contract || !address) return;
 
         async function loadClaimableRewards() {
-            const cr = await contract?.call("availableRewards", address);
+            const cr = await contract?.call("availableRewards", [address]);
             console.log("Loaded claimable rewards", cr);
             setClaimableRewards(cr);
         }
@@ -96,11 +96,11 @@ const Stake: NextPage = () => {
         if (!isApproved) {
             await nftDropContract?.setApprovalForAll(stakingContractAddress, true);
         }
-        const stake = await contract?.call("stake", id);
+        const stake = await contract?.call("stake", [id]);
     }
 
     async function withdraw(id: BigNumber) {
-        const withdraw = await contract?.call("withdraw", id);
+        const withdraw = await contract?.call("withdraw", [id]);
     }
 
     async function claimRewards() {
@@ -118,7 +118,7 @@ const Stake: NextPage = () => {
             <hr className={`${styles.divider} ${styles.spacerTop}`} />
 
             {!address ? (
-                <button className={styles.mainButton} onClick={connectWithMetamask}>
+                <button className={styles.mainButton} onClick={() => connectWithMetamask()}>
                     Connect Wallet
                 </button>
             ) : (
