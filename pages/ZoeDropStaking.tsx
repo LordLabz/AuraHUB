@@ -37,7 +37,7 @@ const Stake: NextPage = () => {
     const { data: stakedTokens } = useContractRead(
         contract,
         "getStakeInfo",
-        address
+        [address]
     );
 
     useEffect(() => {
@@ -46,8 +46,8 @@ const Stake: NextPage = () => {
         async function loadClaimableRewards() {
             const stakeInfo = await contract?.call(
                 "getStakeInfoForToken",
-                0,
-                address
+                [0,
+                address]
             );
             setClaimableRewards(stakeInfo[1]);
         }
@@ -65,7 +65,7 @@ const Stake: NextPage = () => {
         if (!isApproved) {
             await nftDropContract?.setApprovalForAll(ZOE_EDITION_STAKING_ADDRESS, true);
         }
-        await contract?.call("stake", id, 1);
+        await contract?.call("stake", [id, 1]);
     }
 
     if (isLoading) {
@@ -103,7 +103,7 @@ const Stake: NextPage = () => {
                     </div>
 
                     <Web3Button
-                        action={(contract) => contract.call("claimRewards", 0)}
+                        action={(contract) => contract.call("claimRewards", [0])}
                         contractAddress={ZOE_EDITION_STAKING_ADDRESS}
                     >
                         Claim Rewards

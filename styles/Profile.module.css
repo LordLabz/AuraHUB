@@ -1,5 +1,4 @@
-.profileHeader {
-}
+.profileHeader {}
 
 .coverImage {
   width: 100%;
@@ -62,4 +61,12 @@
   display: flex;
   flex-direction: row;
   opacity: 1;
+  width: auto;
+}
+
+.revokeTabContent {
+  display: flex;
+  flex-direction: column;
+  opacity: 1;
+  width: auto;
 }

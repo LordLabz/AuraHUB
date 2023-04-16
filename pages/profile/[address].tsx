@@ -16,6 +16,8 @@ import {
 } from "../../const/contractAddresses";
 import styles from "../../styles/Profile.module.css";
 import randomColor from "../../util/randomColor";
+import EmbedPage from "../embed";
+import Comms from "../comms";
 
 const [randomColor1, randomColor2, randomColor3, randomColor4] = [
   randomColor(),
@@ -26,7 +28,7 @@ const [randomColor1, randomColor2, randomColor3, randomColor4] = [
 
 export default function ProfilePage() {
   const router = useRouter();
-  const [tab, setTab] = useState<"nfts" | "listings" | "auctions">("nfts");
+  const [tab, setTab] = useState<"nfts" | "listings" | "auctions" | "Rev Share" | "RevokeCash" | "comms">("nfts");
 
   const { contract: nftCollection } = useContract(NFT_COLLECTION_ADDRESS);
 
@@ -98,12 +100,32 @@ export default function ProfilePage() {
         >
           Auctions
         </h3>
+        <h3
+          className={`${styles.tab}
+        ${tab === "Rev Share" ? styles.activeTab : ""}`}
+          onClick={() => setTab("Rev Share")}
+        >
+          Rev Share
+        </h3>
+        <h3
+          className={`${styles.tab}
+        ${tab === "RevokeCash" ? styles.activeTab : ""}`}
+          onClick={() => setTab("RevokeCash")}
+        >
+          Revoke.Cash
+        </h3>
+        <h3
+          className={`${styles.tab}
+        ${tab === "comms" ? styles.activeTab : ""}`}
+          onClick={() => setTab("comms")}
+        >
+          Comms
+        </h3>
       </div>
 
       <div
-        className={`${
-          tab === "nfts" ? styles.activeTabContent : styles.tabContent
-        }`}
+        className={`${tab === "nfts" ? styles.activeTabContent : styles.tabContent
+          }`}
       >
         <NFTGrid
           data={ownedNfts}
@@ -113,9 +135,8 @@ export default function ProfilePage() {
       </div>
 
       <div
-        className={`${
-          tab === "listings" ? styles.activeTabContent : styles.tabContent
-        }`}
+        className={`${tab === "listings" ? styles.activeTabContent : styles.tabContent
+          }`}
       >
         {loadingDirects ? (
           <p>Loading...</p>
@@ -129,9 +150,8 @@ export default function ProfilePage() {
       </div>
 
       <div
-        className={`${
-          tab === "auctions" ? styles.activeTabContent : styles.tabContent
-        }`}
+        className={`${tab === "auctions" ? styles.activeTabContent : styles.tabContent
+          }`}
       >
         {loadingAuctions ? (
           <p>Loading...</p>
@@ -142,6 +162,27 @@ export default function ProfilePage() {
             <ListingWrapper listing={listing} key={listing.id} />
           ))
         )}
+      </div>
+
+      <div
+        className={`${tab === "Rev Share" ? styles.activeTabContent : styles.tabContent
+          }`}
+      >
+        <h1 style={{ textAlign: 'center' }}>Coming Soon 🚀</h1>
+      </div>
+
+      <div
+        className={`${tab === "RevokeCash" ? styles.revokeTabContent : styles.tabContent
+          }`}
+      >
+        <EmbedPage />
+      </div>
+
+      <div
+        className={`${tab === "comms" ? styles.revokeTabContent : styles.tabContent
+          }`}
+      >
+        <Comms />
       </div>
     </Container>
   );
