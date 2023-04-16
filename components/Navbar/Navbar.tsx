@@ -34,8 +34,13 @@ export function Navbar() {
             >
               <Dropdown.Section title="Discover">
                 <Dropdown.Item>
-                  <Link href="/buy" className={styles.link}>
+                  <Link href="/collectionsShowcase" className={styles.link}>
                     Collection
+                  </Link>
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <Link href="/buy" className={styles.link}>
+                    Buy
                   </Link>
                 </Dropdown.Item>
                 <Dropdown.Item>
@@ -46,6 +51,11 @@ export function Navbar() {
                 <Dropdown.Item>
                   <Link href="/earn" className={styles.link}>
                     Earn
+                  </Link>
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <Link href="/mint" className={styles.link}>
+                    Mint
                   </Link>
                 </Dropdown.Item>
                 <Dropdown.Item>
@@ -83,9 +93,9 @@ export function Navbar() {
             <Link className={styles.link} href={`/profile/${address}`}>
               <Image
                 className={styles.profileImage}
-                src="/user-icon.png"
-                width={42}
-                height={42}
+                src="/Aura.png"
+                width={50}
+                height={44}
                 alt="Profile"
               />
             </Link>

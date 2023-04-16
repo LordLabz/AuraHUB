@@ -10,7 +10,7 @@ interface Element {
 }
 
 const elements: Element[] = [
-    {id: 0, name:'Aura Exchange', imageUrl:'https://ipfs.thirdwebcdn.com/ipfs/Qmaw79Y7SFDwj1HPHYAGer5uUCu46oYdk1SVuNb4dyzuKx/AURA%20(300%20%C3%97%20300%20px).png', pcmUrl:'https://www.auraexchange.org/mint'},
+    { id: 0, name: 'Aura Exchange', imageUrl: 'https://ipfs.thirdwebcdn.com/ipfs/Qmaw79Y7SFDwj1HPHYAGer5uUCu46oYdk1SVuNb4dyzuKx/AURA%20(300%20%C3%97%20300%20px).png', pcmUrl: 'https://www.auraexchange.org/mint' },
     { id: 1, name: 'BAPC', imageUrl: '/collectionsLogos/BAPC_Ape.png', pcmUrl: '/comingSoon' },
     { id: 2, name: 'Casa De Luna', imageUrl: '/collectionsLogos/Casa_de_luna-White.png', pcmUrl: '/comingSoon' },
     { id: 3, name: 'Copernic Space', imageUrl: '/collectionsLogos/CopernicSpace.png', pcmUrl: '/comingSoon' },
@@ -27,7 +27,7 @@ const elements: Element[] = [
     { id: 15, name: 'NFT Unity', imageUrl: '/collectionsLogos/NFTUnity.png', pcmUrl: 'https://nft-unity.auraexchange.org/' },
     { id: 16, name: 'Nubis', imageUrl: '/comingSoon.png', pcmUrl: '/comingSoon' },
     { id: 17, name: 'One', imageUrl: '/comingSoon.png', pcmUrl: '/comingSoon' },
-    { id: 18, name: 'PAYC', imageUrl: '/comingSoon.png', pcmUrl: '/comingSoon' },
+    { id: 18, name: 'PAYC', imageUrl: '/collectionsLogos/PAYC.webp', pcmUrl: 'https://payc-pcm.vercel.app/' },
     { id: 19, name: 'PAYC Legends', imageUrl: '/collectionsLogos/PAYCLegendsLogo.png', pcmUrl: '/comingSoon' },
     { id: 20, name: 'Mutant Payc', imageUrl: '/collectionsLogos/PAYCMutantLogo.png', pcmUrl: '/comingSoon' },
     { id: 21, name: 'R.L.A.', imageUrl: '/collectionsLogos/RareLazyApepes.png', pcmUrl: 'https://rarelazyapepes.auraexchange.org/' },
@@ -37,6 +37,7 @@ const elements: Element[] = [
     { id: 24, name: 'WolfPunx NFT', imageUrl: '/comingSoon.png', pcmUrl: '/comingSoon' },
     { id: 24, name: 'X-Moose', imageUrl: '/comingSoon.png', pcmUrl: '/comingSoon' },
     { id: 27, name: 'Zombeze', imageUrl: '/collectionsLogos/zombeze.png', pcmUrl: 'https://zombeze.auraexchange.org/' },
+    { id: 28, name: 'The Wild Child', imageUrl: 'https://ipfs.thirdwebcdn.com/ipfs/QmadU32cULGDXb4RChyoALEDTu4qpf9cTtfyzTxND71Kwb/TWC.gif', pcmUrl: 'https://twc.auraexchange.org/buy' },
 ];
 
 
@@ -54,15 +55,15 @@ const DisplayCollections = () => {
 
     return (
         <div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginLeft:'9.1%'}}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginLeft: '9.1%' }}>
                 {visibleElements.map((element) => (
-                    <div style={{justifyContent:'center', placeItems:'center'}} key={element.id}>
+                    <div style={{ justifyContent: 'center', placeItems: 'center' }} key={element.id}>
                         <a href={element.pcmUrl} target='_blank'>
-                            <Image 
-                            src={element.imageUrl} 
-                            alt={element.name}
-                            width={150}
-                            height={150} />
+                            <Image
+                                src={element.imageUrl}
+                                alt={element.name}
+                                width={150}
+                                height={150} />
                             <p>{element.name}</p>
                         </a>
                     </div>
