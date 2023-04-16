@@ -18,6 +18,7 @@ import styles from "../../styles/Profile.module.css";
 import randomColor from "../../util/randomColor";
 import EmbedPage from "../embed";
 import Comms from "../comms";
+import ZoeClaim from "../ZoeClaim";
 
 const [randomColor1, randomColor2, randomColor3, randomColor4] = [
   randomColor(),
@@ -28,7 +29,7 @@ const [randomColor1, randomColor2, randomColor3, randomColor4] = [
 
 export default function ProfilePage() {
   const router = useRouter();
-  const [tab, setTab] = useState<"nfts" | "listings" | "auctions" | "Rev Share" | "RevokeCash" | "comms">("nfts");
+  const [tab, setTab] = useState<"nfts" | "listings" | "auctions" | "Rev Share" | "RevokeCash" | "ZoeClaim" | "comms">("nfts");
 
   const { contract: nftCollection } = useContract(NFT_COLLECTION_ADDRESS);
 
@@ -105,7 +106,7 @@ export default function ProfilePage() {
         ${tab === "Rev Share" ? styles.activeTab : ""}`}
           onClick={() => setTab("Rev Share")}
         >
-          Rev Share
+          RevShare/Stake
         </h3>
         <h3
           className={`${styles.tab}
@@ -120,6 +121,13 @@ export default function ProfilePage() {
           onClick={() => setTab("comms")}
         >
           Comms
+        </h3>
+        <h3
+          className={`${styles.tab}
+        ${tab === "ZoeClaim" ? styles.activeTab : ""}`}
+          onClick={() => setTab("ZoeClaim")}
+        >
+          Zoe Claim
         </h3>
       </div>
 
@@ -165,7 +173,7 @@ export default function ProfilePage() {
       </div>
 
       <div
-        className={`${tab === "Rev Share" ? styles.activeTabContent : styles.tabContent
+        className={`${tab === "Rev Share" ? styles.activeRevShareTabContent : styles.tabContent
           }`}
       >
         <h1 style={{ textAlign: 'center' }}>Coming Soon 🚀</h1>
@@ -183,6 +191,13 @@ export default function ProfilePage() {
           }`}
       >
         <Comms />
+      </div>
+
+      <div
+        className={`${tab === "ZoeClaim" ? styles.activeTabContent : styles.tabContent
+          }`}
+      >
+        <ZoeClaim />
       </div>
     </Container>
   );
