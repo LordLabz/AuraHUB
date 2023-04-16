@@ -17,6 +17,7 @@ import {
 import styles from "../../styles/Profile.module.css";
 import randomColor from "../../util/randomColor";
 import EmbedPage from "../embed";
+import Comms from "../comms";
 
 const [randomColor1, randomColor2, randomColor3, randomColor4] = [
   randomColor(),
@@ -27,7 +28,7 @@ const [randomColor1, randomColor2, randomColor3, randomColor4] = [
 
 export default function ProfilePage() {
   const router = useRouter();
-  const [tab, setTab] = useState<"nfts" | "listings" | "auctions" | "Rev Share">("nfts");
+  const [tab, setTab] = useState<"nfts" | "listings" | "auctions" | "Rev Share" | "RevokeCash" | "comms">("nfts");
 
   const { contract: nftCollection } = useContract(NFT_COLLECTION_ADDRESS);
 
@@ -106,6 +107,20 @@ export default function ProfilePage() {
         >
           Rev Share
         </h3>
+        <h3
+          className={`${styles.tab}
+        ${tab === "RevokeCash" ? styles.activeTab : ""}`}
+          onClick={() => setTab("RevokeCash")}
+        >
+          Revoke.Cash
+        </h3>
+        <h3
+          className={`${styles.tab}
+        ${tab === "comms" ? styles.activeTab : ""}`}
+          onClick={() => setTab("comms")}
+        >
+          Comms
+        </h3>
       </div>
 
       <div
@@ -154,6 +169,20 @@ export default function ProfilePage() {
           }`}
       >
         <h1 style={{ textAlign: 'center' }}>Coming Soon 🚀</h1>
+      </div>
+
+      <div
+        className={`${tab === "RevokeCash" ? styles.revokeTabContent : styles.tabContent
+          }`}
+      >
+        <EmbedPage />
+      </div>
+
+      <div
+        className={`${tab === "comms" ? styles.revokeTabContent : styles.tabContent
+          }`}
+      >
+        <Comms />
       </div>
     </Container>
   );

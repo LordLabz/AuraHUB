@@ -1,12 +1,12 @@
 import React from 'react';
 
-const EmbedPage = () => {
+const Comms = () => {
     return (
         <div>
 
-            <h1 style={{ textAlign: 'center' }}>Need to revoke permissions?</h1>
+            <h1 style={{ textAlign: 'center' }}>Aura Comms 🛰️</h1>
             <iframe
-                src="https://revoke.cash/"
+                src="https://comms.auraexchange.org/"
                 width="100%"
                 height="800"
                 frameBorder="0"
@@ -19,4 +19,4 @@ const EmbedPage = () => {
     );
 };
 
-export default EmbedPage;
+export default Comms;
