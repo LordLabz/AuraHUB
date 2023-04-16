@@ -11,7 +11,7 @@ interface Element {
 }
 
 const elements: Element[] = [
-    {id: 0, name:'Aura Exchange', imageUrl:'https://ipfs.thirdwebcdn.com/ipfs/Qmaw79Y7SFDwj1HPHYAGer5uUCu46oYdk1SVuNb4dyzuKx/AURA%20(300%20%C3%97%20300%20px).png', pcmUrl:'https://www.auraexchange.org/mint'},
+    { id: 0, name: 'Aura Exchange', imageUrl: 'https://ipfs.thirdwebcdn.com/ipfs/Qmaw79Y7SFDwj1HPHYAGer5uUCu46oYdk1SVuNb4dyzuKx/AURA%20(300%20%C3%97%20300%20px).png', pcmUrl: 'https://www.auraexchange.org/mint' },
     { id: 1, name: 'BAPC', imageUrl: '/collectionsLogos/BAPC_Ape.png', pcmUrl: '/comingSoon' },
     { id: 2, name: 'Casa De Luna', imageUrl: '/collectionsLogos/Casa_de_luna-White.png', pcmUrl: '/comingSoon' },
     { id: 3, name: 'Copernic Space', imageUrl: '/collectionsLogos/CopernicSpace.png', pcmUrl: '/comingSoon' },
@@ -38,6 +38,7 @@ const elements: Element[] = [
     { id: 24, name: 'WolfPunx NFT', imageUrl: '/comingSoon.png', pcmUrl: '/comingSoon' },
     { id: 24, name: 'X-Moose', imageUrl: '/comingSoon.png', pcmUrl: '/comingSoon' },
     { id: 27, name: 'Zombeze', imageUrl: '/collectionsLogos/zombeze.png', pcmUrl: 'https://zombeze.auraexchange.org/' },
+    { id: 28, name: 'The Wild Child', imageUrl: 'https://ipfs.thirdwebcdn.com/ipfs/QmadU32cULGDXb4RChyoALEDTu4qpf9cTtfyzTxND71Kwb/TWC.gif', pcmUrl: 'https://twc.auraexchange.org/buy' },
 ];
 
 export default function SearchBar() {
@@ -50,7 +51,7 @@ export default function SearchBar() {
         console.log(filtered.length)
         if (searchTerm != '')
             setFilteredData(filtered);
-        else{
+        else {
             setFilteredData([])
         }
     }
@@ -82,16 +83,16 @@ export default function SearchBar() {
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }} >
                 {filteredData.map(item => (
-                        <div key={item.id}>
-                            <a href={item.pcmUrl} target='_blank'>
-                                <Image
-                                    src={item.imageUrl}
-                                    alt={item.name}
-                                    width={150}
-                                    height={150} />
-                                <p>{item.name}</p>
-                            </a>
-                        </div>
+                    <div key={item.id}>
+                        <a href={item.pcmUrl} target='_blank'>
+                            <Image
+                                src={item.imageUrl}
+                                alt={item.name}
+                                width={150}
+                                height={150} />
+                            <p>{item.name}</p>
+                        </a>
+                    </div>
                 ))}
             </div>
         </>
