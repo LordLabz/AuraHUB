@@ -224,22 +224,23 @@ const Home = () => {
         <p>Loading...</p>
       ) : (
         <>
-          {contractMetadata?.image && (
-            <Image
-              src={contractMetadata?.image}
-              alt={contractMetadata?.name!}
-              width={200}
-              height={200}
-              style={{ objectFit: "contain" }}
-            />
-          )}
+       <h2>$ZOE Claim Coming Soon...</h2>
+                    {contractMetadata?.image && (
+                        <Image
+                            src={contractMetadata?.image}
+                            alt={contractMetadata?.name!}
+                            width={200}
+                            height={200}
+                            style={{ objectFit: "contain" }}
+                        />
+                    )}
 
-          <h2 className={styles.title}>Claim Tokens</h2>
-          <p className={styles.explain}>
-            Claim ERC20 tokens from{" "}
-            <span className={styles.pink}>{contractMetadata?.name}</span>
-          </p>
-        </>
+                    <h2 className={styles.title}>$ZOE</h2>
+                    <p className={styles.explain}>
+                        Claim 2000 $ZOE for each Aura Pass{" "}
+                        <span className={styles.red}>{contractMetadata?.name}</span>
+                    </p>
+                </>
       )}
 
       <hr className={styles.divider} />
