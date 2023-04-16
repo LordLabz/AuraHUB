@@ -1,309 +1,279 @@
 import {
-    useActiveClaimConditionForWallet,
-    useAddress,
-    useClaimConditions,
-    useClaimerProofs,
-    useClaimIneligibilityReasons,
-    useContract,
-    useContractMetadata,
-    useTokenSupply,
-    Web3Button,
+  useActiveClaimConditionForWallet,
+  useAddress,
+  useClaimConditions,
+  useClaimerProofs,
+  useClaimIneligibilityReasons,
+  useContract,
+  useContractMetadata,
+  useTokenSupply,
+  Web3Button,
 } from "@thirdweb-dev/react";
 import { BigNumber, utils } from "ethers";
 import Image from "next/image";
-import { useMemo, useState, useEffect } from "react";
-import styles from "../styles/ZoeClaim.module.css";
+import { useMemo, useState } from "react";
+import styles from "../styles/Home.module.css";
 import { parseIneligibility } from "../util/parseIneliginbility";
 
-const useIsNFTOwner = (contract, nftContractAddress, userAddress) => {
-    const [isOwner, setIsOwner] = useState(false);
+const Home = () => {
+  const tokenAddress = "0xE166c801A0cCb838ACeFFCdd9F4C813574A8E6A4";
+  const { contract } = useContract(tokenAddress, "token-drop");
+  const address = useAddress();
+  const [quantity, setQuantity] = useState(1);
+  const { data: contractMetadata } = useContractMetadata(contract);
 
-    useEffect(() => {
-        if (userAddress) {
-            const checkOwnership = async () => {
-                const balance = await contract.balanceOf(userAddress, nftContractAddress);
-                if (balance && typeof balance.gt === 'function') {
-                    setIsOwner(balance.gt(0));
-                } else {
-                    setIsOwner(false);
-                }
-            };
-            checkOwnership();
-        } else {
-            setIsOwner(false);
-        }
-    }, [contract, nftContractAddress, userAddress]);
+  const claimConditions = useClaimConditions(contract);
+  const activeClaimCondition = useActiveClaimConditionForWallet(
+    contract,
+    address
+  );
+  const claimerProofs = useClaimerProofs(contract, address || "");
+  const claimIneligibilityReasons = useClaimIneligibilityReasons(contract, {
+    quantity,
+    walletAddress: address || "",
+  });
 
-    return isOwner;
-};
+  const claimedSupply = useTokenSupply(contract);
 
+  const totalAvailableSupply = useMemo(() => {
+    try {
+      return BigNumber.from(activeClaimCondition.data?.availableSupply || 0);
+    } catch {
+      return BigNumber.from(1_000_000_000);
+    }
+  }, [activeClaimCondition.data?.availableSupply]);
 
-const ZoeClaim = () => {
-    const tokenAddress = "0xE166c801A0cCb838ACeFFCdd9F4C813574A8E6A4";
-    const { contract } = useContract(tokenAddress, "token-drop");
-    const address = useAddress();
-    const [quantity, setQuantity] = useState(1);
-    const { data: contractMetadata } = useContractMetadata(contract);
-    const nftContractAddress = "0x7b4B550d6cbf55441f6153c71A5D173d860d83fE";
-    const isNFTOwner = useIsNFTOwner(contract, nftContractAddress, address);
+  const numberClaimed = useMemo(() => {
+    return BigNumber.from(claimedSupply.data?.value || 0).toString();
+  }, [claimedSupply]);
 
-    const claimConditions = useClaimConditions(contract);
-    const activeClaimCondition = useActiveClaimConditionForWallet(
-        contract,
-        address
+  const numberTotal = useMemo(() => {
+    const n = totalAvailableSupply.add(
+      BigNumber.from(claimedSupply.data?.value || 0)
     );
-    const claimerProofs = useClaimerProofs(contract, address || "");
-    const claimIneligibilityReasons = useClaimIneligibilityReasons(contract, {
-        quantity,
-        walletAddress: address || "",
-    });
+    if (n.gte(1_000_000_000)) {
+      return "";
+    }
+    return n.toString();
+  }, [totalAvailableSupply, claimedSupply]);
 
-    const claimedSupply = useTokenSupply(contract);
+  const priceToMint = useMemo(() => {
+    if (quantity) {
+      const bnPrice = BigNumber.from(
+        activeClaimCondition.data?.currencyMetadata.value || 0
+      );
+      return `${utils.formatUnits(
+        bnPrice.mul(quantity).toString(),
+        activeClaimCondition.data?.currencyMetadata.decimals || 18
+      )} ${activeClaimCondition.data?.currencyMetadata.symbol}`;
+    }
+  }, [
+    activeClaimCondition.data?.currencyMetadata.decimals,
+    activeClaimCondition.data?.currencyMetadata.symbol,
+    activeClaimCondition.data?.currencyMetadata.value,
+    quantity,
+  ]);
 
-    const totalAvailableSupply = useMemo(() => {
+  const maxClaimable = useMemo(() => {
+    let bnMaxClaimable;
+    try {
+      bnMaxClaimable = BigNumber.from(
+        activeClaimCondition.data?.maxClaimableSupply || 0
+      );
+    } catch (e) {
+      bnMaxClaimable = BigNumber.from(1_000_000_000);
+    }
+
+    let perTransactionClaimable;
+    try {
+      perTransactionClaimable = BigNumber.from(
+        activeClaimCondition.data?.maxClaimablePerWallet || 0
+      );
+    } catch (e) {
+      perTransactionClaimable = BigNumber.from(1_000_000_000);
+    }
+
+    if (perTransactionClaimable.lte(bnMaxClaimable)) {
+      bnMaxClaimable = perTransactionClaimable;
+    }
+
+    const snapshotClaimable = claimerProofs.data?.maxClaimable;
+
+    if (snapshotClaimable) {
+      if (snapshotClaimable === "0") {
+        // allowed unlimited for the snapshot
+        bnMaxClaimable = BigNumber.from(1_000_000_000);
+      } else {
         try {
-            return BigNumber.from(activeClaimCondition.data?.availableSupply || 0);
-        } catch {
-            return BigNumber.from(1_000_000_000);
-        }
-    }, [activeClaimCondition.data?.availableSupply]);
-
-    const numberClaimed = useMemo(() => {
-        return BigNumber.from(claimedSupply.data?.value || 0).toString();
-    }, [claimedSupply]);
-
-    const numberTotal = useMemo(() => {
-        const n = totalAvailableSupply.add(
-            BigNumber.from(claimedSupply.data?.value || 0)
-        );
-        if (n.gte(1_000_000_000)) {
-            return "";
-        }
-        return n.toString();
-    }, [totalAvailableSupply, claimedSupply]);
-
-    const priceToMint = useMemo(() => {
-        if (quantity) {
-            const bnPrice = BigNumber.from(
-                activeClaimCondition.data?.currencyMetadata.value || 0
-            );
-            return `${utils.formatUnits(
-                bnPrice.mul(quantity).toString(),
-                activeClaimCondition.data?.currencyMetadata.decimals || 18
-            )} ${activeClaimCondition.data?.currencyMetadata.symbol}`;
-        }
-    }, [
-        activeClaimCondition.data?.currencyMetadata.decimals,
-        activeClaimCondition.data?.currencyMetadata.symbol,
-        activeClaimCondition.data?.currencyMetadata.value,
-        quantity,
-    ]);
-
-    const maxClaimable = useMemo(() => {
-        let bnMaxClaimable;
-        try {
-            bnMaxClaimable = BigNumber.from(
-                activeClaimCondition.data?.maxClaimableSupply || 0
-            );
+          bnMaxClaimable = BigNumber.from(snapshotClaimable);
         } catch (e) {
-            bnMaxClaimable = BigNumber.from(1_000_000_000);
+          // fall back to default case
         }
+      }
+    }
 
-        let perTransactionClaimable;
-        try {
-            perTransactionClaimable = BigNumber.from(
-                activeClaimCondition.data?.maxClaimablePerWallet || 0
-            );
-        } catch (e) {
-            perTransactionClaimable = BigNumber.from(1_000_000_000);
-        }
+    let max;
+    if (totalAvailableSupply.lt(bnMaxClaimable)) {
+      max = totalAvailableSupply;
+    } else {
+      max = bnMaxClaimable;
+    }
 
-        if (perTransactionClaimable.lte(bnMaxClaimable)) {
-            bnMaxClaimable = perTransactionClaimable;
-        }
+    if (max.gte(1_000_000_000)) {
+      return 1_000_000_000;
+    }
+    return max.toNumber();
+  }, [
+    claimerProofs.data?.maxClaimable,
+    totalAvailableSupply,
+    activeClaimCondition.data?.maxClaimableSupply,
+    activeClaimCondition.data?.maxClaimablePerWallet,
+  ]);
 
-        const snapshotClaimable = claimerProofs.data?.maxClaimable;
+  const isSoldOut = useMemo(() => {
+    try {
+      return (
+        (activeClaimCondition.isSuccess &&
+          BigNumber.from(activeClaimCondition.data?.availableSupply || 0).lte(
+            0
+          )) ||
+        numberClaimed === numberTotal
+      );
+    } catch (e) {
+      return false;
+    }
+  }, [
+    activeClaimCondition.data?.availableSupply,
+    activeClaimCondition.isSuccess,
+    numberClaimed,
+    numberTotal,
+  ]);
 
-        if (snapshotClaimable) {
-            if (snapshotClaimable === "0") {
-                // allowed unlimited for the snapshot
-                bnMaxClaimable = BigNumber.from(1_000_000_000);
-            } else {
-                try {
-                    bnMaxClaimable = BigNumber.from(snapshotClaimable);
-                } catch (e) {
-                    // fall back to default case
-                }
-            }
-        }
-
-        let max;
-        if (totalAvailableSupply.lt(bnMaxClaimable)) {
-            max = totalAvailableSupply;
-        } else {
-            max = bnMaxClaimable;
-        }
-
-        if (isNFTOwner) {
-            return 2000;
-        } else {
-            return 0;
-        }
-    }, [
-        claimerProofs.data?.maxClaimable,
-        totalAvailableSupply,
-        activeClaimCondition.data?.maxClaimableSupply,
-        activeClaimCondition.data?.maxClaimablePerWallet,
-        isNFTOwner,
-    ]);
-
-    const isSoldOut = useMemo(() => {
-        try {
-            return (
-                (activeClaimCondition.isSuccess &&
-                    BigNumber.from(activeClaimCondition.data?.availableSupply || 0).lte(
-                        0
-                    )) ||
-                numberClaimed === numberTotal
-            );
-        } catch (e) {
-            return false;
-        }
-    }, [
-        activeClaimCondition.data?.availableSupply,
-        activeClaimCondition.isSuccess,
-        numberClaimed,
-        numberTotal,
-    ]);
-
-    const canClaim = useMemo(() => {
-        return (
-            activeClaimCondition.isSuccess &&
-            claimIneligibilityReasons.isSuccess &&
-            claimIneligibilityReasons.data?.length === 0 &&
-            !isSoldOut
-        );
-    }, [
-        activeClaimCondition.isSuccess,
-        claimIneligibilityReasons.data?.length,
-        claimIneligibilityReasons.isSuccess,
-        isSoldOut,
-    ]);
-
-    const isLoading = useMemo(() => {
-        return activeClaimCondition.isLoading || !contract;
-    }, [activeClaimCondition.isLoading, contract]);
-
-    const buttonLoading = useMemo(
-        () => isLoading || claimIneligibilityReasons.isLoading,
-        [claimIneligibilityReasons.isLoading, isLoading]
-    );
-    const buttonText = useMemo(() => {
-        if (isSoldOut) {
-            return "Sold Out";
-        }
-
-        if (canClaim) {
-            const pricePerToken = BigNumber.from(
-                activeClaimCondition.data?.currencyMetadata.value || 0
-            );
-            if (pricePerToken.eq(0)) {
-                return "Mint (Free)";
-            }
-            return `Mint (${priceToMint})`;
-        }
-        if (claimIneligibilityReasons.data?.length) {
-            return parseIneligibility(claimIneligibilityReasons.data, quantity);
-        }
-        if (buttonLoading) {
-            return "Checking eligibility...";
-        }
-
-        return "Claiming not available";
-    }, [
-        isSoldOut,
-        canClaim,
-        claimIneligibilityReasons.data,
-        buttonLoading,
-        activeClaimCondition.data?.currencyMetadata.value,
-        priceToMint,
-        quantity,
-    ]);
-
+  const canClaim = useMemo(() => {
     return (
-        <div className={styles.container}>
-            {(claimConditions.data &&
-                claimConditions.data.length > 0 &&
-                activeClaimCondition.isError) ||
-                (activeClaimCondition.data &&
-                    activeClaimCondition.data.startTime > new Date() && (
-                        <p>Drop is starting soon. Please check back later.</p>
-                    ))}
-
-            {claimConditions.data?.length === 0 ||
-                (claimConditions.data?.every(
-                    (cc) => cc.maxClaimableSupply === "0"
-                ) && (
-                        <p>
-                            This drop is not ready to be minted yet. (No claim condition set)
-                        </p>
-                    ))}
-
-            {isLoading ? (
-                <p>Loading...</p>
-            ) : (
-                <>
-                <h2>$ZOE Claim Coming Soon...</h2>
-                    {contractMetadata?.image && (
-                        <Image
-                            src={contractMetadata?.image}
-                            alt={contractMetadata?.name!}
-                            width={200}
-                            height={200}
-                            style={{ objectFit: "contain" }}
-                        />
-                    )}
-
-                    <h2 className={styles.title}>$ZOE</h2>
-                    <p className={styles.explain}>
-                        Claim 2000 $ZOE for each Aura Pass{" "}
-                        <span className={styles.red}>{contractMetadata?.name}</span>
-                    </p>
-                </>
-            )}
-
-            <hr className={styles.divider} />
-
-            <div className={styles.claimGrid}>
-                <input
-                    type="number"
-                    placeholder="Enter amount to claim"
-                    onChange={(e) => {
-                        const value = parseInt(e.target.value);
-                        if (value > maxClaimable) {
-                            setQuantity(maxClaimable);
-                        } else if (value < 1) {
-                            setQuantity(1);
-                        } else {
-                            setQuantity(value);
-                        }
-                    }}
-                    value={quantity}
-                    className={`${styles.textInput} ${styles.noGapBottom}`}
-                />
-                <Web3Button
-                    accentColor="#5204BF"
-                    colorMode="dark"
-                    contractAddress={tokenAddress}
-                    action={(contract) => contract.erc20.claim(quantity)}
-                    onSuccess={() => alert("Claimed!")}
-                    onError={(err) => alert(err)}
-                >
-                    {buttonText}
-                </Web3Button>
-            </div>
-        </div>
+      activeClaimCondition.isSuccess &&
+      claimIneligibilityReasons.isSuccess &&
+      claimIneligibilityReasons.data?.length === 0 &&
+      !isSoldOut
     );
+  }, [
+    activeClaimCondition.isSuccess,
+    claimIneligibilityReasons.data?.length,
+    claimIneligibilityReasons.isSuccess,
+    isSoldOut,
+  ]);
+
+  const isLoading = useMemo(() => {
+    return activeClaimCondition.isLoading || !contract;
+  }, [activeClaimCondition.isLoading, contract]);
+
+  const buttonLoading = useMemo(
+    () => isLoading || claimIneligibilityReasons.isLoading,
+    [claimIneligibilityReasons.isLoading, isLoading]
+  );
+  const buttonText = useMemo(() => {
+    if (isSoldOut) {
+      return "Sold Out";
+    }
+
+    if (canClaim) {
+      const pricePerToken = BigNumber.from(
+        activeClaimCondition.data?.currencyMetadata.value || 0
+      );
+      if (pricePerToken.eq(0)) {
+        return "Mint (Free)";
+      }
+      return `Mint (${priceToMint})`;
+    }
+    if (claimIneligibilityReasons.data?.length) {
+      return parseIneligibility(claimIneligibilityReasons.data, quantity);
+    }
+    if (buttonLoading) {
+      return "Checking eligibility...";
+    }
+
+    return "Claiming not available";
+  }, [
+    isSoldOut,
+    canClaim,
+    claimIneligibilityReasons.data,
+    buttonLoading,
+    activeClaimCondition.data?.currencyMetadata.value,
+    priceToMint,
+    quantity,
+  ]);
+
+  return (
+    <div className={styles.container}>
+      {(claimConditions.data &&
+        claimConditions.data.length > 0 &&
+        activeClaimCondition.isError) ||
+        (activeClaimCondition.data &&
+          activeClaimCondition.data.startTime > new Date() && (
+            <p>Drop is starting soon. Please check back later.</p>
+          ))}
+
+      {claimConditions.data?.length === 0 ||
+        (claimConditions.data?.every((cc) => cc.maxClaimableSupply === "0") && (
+          <p>
+            This drop is not ready to be minted yet. (No claim condition set)
+          </p>
+        ))}
+
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          {contractMetadata?.image && (
+            <Image
+              src={contractMetadata?.image}
+              alt={contractMetadata?.name!}
+              width={200}
+              height={200}
+              style={{ objectFit: "contain" }}
+            />
+          )}
+
+          <h2 className={styles.title}>Claim Tokens</h2>
+          <p className={styles.explain}>
+            Claim ERC20 tokens from{" "}
+            <span className={styles.pink}>{contractMetadata?.name}</span>
+          </p>
+        </>
+      )}
+
+      <hr className={styles.divider} />
+
+      <div className={styles.claimGrid}>
+        <input
+          type="number"
+          placeholder="Enter amount to claim"
+          onChange={(e) => {
+            const value = parseInt(e.target.value);
+            if (value > maxClaimable) {
+              setQuantity(maxClaimable);
+            } else if (value < 1) {
+              setQuantity(1);
+            } else {
+              setQuantity(value);
+            }
+          }}
+          value={quantity}
+          className={`${styles.textInput} ${styles.noGapBottom}`}
+        />
+        <Web3Button
+          accentColor="#5204BF"
+          colorMode="dark"
+          contractAddress={tokenAddress}
+          action={(contract) => contract.erc20.claim(quantity)}
+          onSuccess={() => alert("Claimed!")}
+          onError={(err) => alert(err)}
+        >
+          {buttonText}
+        </Web3Button>
+      </div>
+    </div>
+  );
 };
 
-export default ZoeClaim;
+export default Home;
