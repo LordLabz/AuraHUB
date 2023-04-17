@@ -49,11 +49,6 @@ export function Navbar() {
                   </Link>
                 </Dropdown.Item>
                 <Dropdown.Item>
-                  <Link href="/ZoeClaim" className={styles.link}>
-                    Zoe Claim
-                  </Link>
-                </Dropdown.Item>
-                <Dropdown.Item>
                   <Link href="/earn" className={styles.link}>
                     Earn
                   </Link>
