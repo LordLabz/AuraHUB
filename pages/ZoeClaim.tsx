@@ -12,7 +12,7 @@ import {
 import { BigNumber, utils } from "ethers";
 import Image from "next/image";
 import { useMemo, useState } from "react";
-import styles from "../styles/Home.module.css";
+import styles from "../styles/ZoeClaim.module.css";
 import { parseIneligibility } from "../util/parseIneliginbility";
 
 const Home = () => {
