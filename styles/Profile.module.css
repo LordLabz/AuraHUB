@@ -70,3 +70,10 @@
   opacity: 1;
   width: auto;
 }
+
+.activeRevShareTabContent {
+  display: flex;
+  flex-direction: column;
+  opacity: 1;
+  width: auto;
+}
