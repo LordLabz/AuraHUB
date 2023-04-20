@@ -1,21 +1,37 @@
 .secondaryCta {
-    color: #fff;
-    font-size: 16px;
-    font-weight: 500;
-    letter-spacing: 0.2px;
-    line-height: 20px;
-    transition: background-color 0.2s;
-    width: 280px;
-    border: 1px solid hsla(0, 0%, 100%, 0.25);
-    height: 48px;
-    display: flex;
-    justify-content: center;
-    border-radius: 8px;
-    transition: all 0.15s ease-in-out;
-    margin: auto;
-    
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  line-height: 20px;
+  transition: background-color 0.2s;
+  width: 280px;
+  border: 1px solid hsla(0, 0%, 100%, 0.25);
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  border-radius: 8px;
+  transition: all 0.15s ease-in-out;
+  margin: auto;
+
+}
+
+.collectionGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16;
+  margin-left: 9.1%;
+}
+
+@media (max-width: 600px) {
+  .collectionGrid {
+    display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8;
+  margin-left: 9.1%;
   }
-  
-  .secondaryCta:hover {
-    background-color: hsla(0, 0%, 100%, 0.1);
-  }
+}
+
+.secondaryCta:hover {
+  background-color: hsla(0, 0%, 100%, 0.1);
+}
