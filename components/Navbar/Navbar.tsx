@@ -15,6 +15,7 @@ export function Navbar() {
     <div className={styles.navContainer}>
       <nav className={styles.nav}>
         <div className={styles.navLeft}>
+          <div className={styles.navConnect}>
           <Link href="/" className={`${styles.homeLink} ${styles.navLeft}`}>
             <Image
               src="/logo.png"
@@ -23,6 +24,7 @@ export function Navbar() {
               alt="NFT marketplace sample logo"
             />
           </Link>
+          </div>
           <Dropdown>
             <Dropdown.Button flat color="secondary">
               Menu
