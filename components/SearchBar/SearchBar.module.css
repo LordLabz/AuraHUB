@@ -12,9 +12,21 @@
     line-height: normal;
 }
 
-.popular{
-
-}
+.collectionGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16;
+    margin-left: 9.1%;
+  }
+  
+  @media (max-width: 600px) {
+    .collectionGrid {
+      display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8;
+    margin-left: 9.1%;
+    }
+  }
 
 .icon{
     position:absolute;
