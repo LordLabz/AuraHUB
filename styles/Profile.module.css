@@ -1,7 +1,8 @@
 .profileHeader {}
 
 .coverImage {
-  width: 100%;
+  width: auto;
+  height: auto;
   background-color: #272a2d;
   height: 300px;
   border-radius: 16px;
