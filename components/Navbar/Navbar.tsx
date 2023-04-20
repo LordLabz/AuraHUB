@@ -88,7 +88,7 @@ export function Navbar() {
         </div>
 
         <div className={styles.navRight}>
-          <div className={styles.navConnect}>
+          <div className={styles.navRight}>
             <ConnectWallet />
           </div>
           {address && (
