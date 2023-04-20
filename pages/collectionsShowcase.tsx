@@ -8,13 +8,13 @@ import DisplayCollections from "../components/DisplayCollections/DisplayCollecti
 export default function collectionsShowcase() {
     return (
         <Container maxWidth="lg">
-            <h1 style={{ textAlign: 'center' }}>Collections</h1>
+            <h1>Collections</h1>
 
             {/* Search bar     */}
             <SearchBar />
 
             {/*Featued Collections */}
-            <div style={{ paddingTop: "4rem" }}>
+            <div style={{ paddingTop: "4rem", width:'100%' }}>
                 <h1 style={{ textAlign: 'center' }}>Featured Collections</h1>
                 <FeaturedCollections />
             </div>
@@ -23,9 +23,9 @@ export default function collectionsShowcase() {
             <div>
                 <h1 style={{ textAlign: 'center' }}>Browse Collections</h1>
                 <div>
-                    <DisplayCollections />
+                    <DisplayCollections/>
                 </div>
-
+                
             </div>
         </Container>
     );
